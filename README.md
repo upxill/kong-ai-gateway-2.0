@@ -1,4 +1,4 @@
-# Kong Konnect AI Gateway → Azure AI Foundry
+# Kong Konnect AI Gateway 2.0
 
 Route OpenAI-style requests through a Kong Konnect **Serverless** gateway to an Azure AI Foundry deployment (`gpt-5.4-mini`). This repo has the full setup guide plus config as code for **decK** and **Terraform**.
 
