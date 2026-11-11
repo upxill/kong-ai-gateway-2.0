@@ -1,0 +1,30 @@
+_format_version: "3.0"
+
+# Kong Konnect: route /chat/completions to Azure AI Foundry (gpt-5.4-mini)
+# Apply with:  see ../README.md, "decK" section
+# The Azure key is read from the DECK_AZURE_KEY environment variable. Never commit it.
+
+services:
+  - name: azure-foundry
+    url: https://srinipolagani-8291-resource.openai.azure.com
+    routes:
+      - name: azure-chat
+        paths:
+          - /chat/completions
+        methods:
+          - POST
+        strip_path: true
+        plugins:
+          - name: ai-proxy
+            config:
+              route_type: llm/v1/chat
+              auth:
+                header_name: api-key
+                header_value: ${{ env "DECK_AZURE_KEY" }}
+              model:
+                provider: azure
+                name: gpt-5.4-mini
+                options:
+                  azure_instance: srinipolagani-8291-resource
+                  azure_deployment_id: gpt-5.4-mini
+                  azure_api_version: "2025-04-01-preview"
